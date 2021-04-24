@@ -2,7 +2,6 @@ package com.cg.ova.service;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.cg.ova.dao.IVegetableDAO;
 import com.cg.ova.dao.VegetableMgmtDAOImpl;
 import com.cg.ova.entity.VegetableDTO;
@@ -69,13 +68,13 @@ public class VegetableMgmtServiceImpl implements IVegetableMgmtService {
 		}
 			
 
-	public VegetableDTO addVegetable(VegetableDTO dto) {
+	public VegetableDTO addVegetable(VegetableDTO dto)throws VegetableIdNotFoundException {
 		if(isValidvegetable(dto))
 			vegetableMgmtDAO.addVegetable(dto);
 	return dto;
 	}
 
-	public VegetableDTO updateVegetable(VegetableDTO dto) {
+	public VegetableDTO updateVegetable(VegetableDTO dto)throws VegetableIdNotFoundException  {
 		if(isValidvegetable(dto))
 			vegetableMgmtDAO.updateVegetable(dto);
 	return dto;
