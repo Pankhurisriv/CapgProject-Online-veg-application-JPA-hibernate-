@@ -1,0 +1,19 @@
+
+CREATE TABLE Customer(
+customerID number(10) CONSTRAINTS customer_customerId_pk PRIMARY KEY,
+name varchar2(30) CONSTRAINTS customer_name_nn NOT NULL,
+mobileNumber varchar2(10) CONSTRAINTS customer_mobileNo_nn NOT NULL,
+emailId varchar2(30) CONSTRAINTS customer_emailId_un_nn UNIQUE NOT NULL,
+password varchar2(20) CONSTRAINTS customer_password_un_nn UNIQUE NOT NULL,
+confirmPassword varchar2(20) CONSTRAINTS customer_confirmPassword_nn  NOT NULL,
+flatNo varchar2(30) CONSTRAINTS customer_flatNo_fk REFERENCES address(flatNo)
+);
+
+INSERT INTO Customer VALUES('Priya','9874317890','priya@gmail.com','abc123','abc123',101);
+INSERT INTO Customer VALUES('Rahul','9873317890','rahul@gmail.com','efg123','efg123',102);
+INSERT INTO Customer VALUES('Raj','6874317890','raj@gmail.com','hij123','hij123',103);
+INSERT INTO Customer VALUES('Sam','0874317890','sam@gmail.com','xyz123','xyz123',104);
+
+----------------------------------------------------------------------------------------------------
+
+
