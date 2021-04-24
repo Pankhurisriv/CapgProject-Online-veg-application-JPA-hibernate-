@@ -1,19 +1,62 @@
-
 CREATE TABLE Customer(
-customerID number(10) CONSTRAINTS customer_customerId_pk PRIMARY KEY,
+customerId number(20) CONSTRAINTS customer_customerId_pk PRIMARY KEY,
 name varchar2(30) CONSTRAINTS customer_name_nn NOT NULL,
 mobileNumber varchar2(10) CONSTRAINTS customer_mobileNo_nn NOT NULL,
 emailId varchar2(30) CONSTRAINTS customer_emailId_un_nn UNIQUE NOT NULL,
 password varchar2(20) CONSTRAINTS customer_password_un_nn UNIQUE NOT NULL,
-confirmPassword varchar2(20) CONSTRAINTS customer_confirmPassword_nn  NOT NULL,
-flatNo varchar2(30) CONSTRAINTS customer_flatNo_fk REFERENCES address(flatNo)
-);
-
-INSERT INTO Customer VALUES('Priya','9874317890','priya@gmail.com','abc123','abc123',101);
-INSERT INTO Customer VALUES('Rahul','9873317890','rahul@gmail.com','efg123','efg123',102);
-INSERT INTO Customer VALUES('Raj','6874317890','raj@gmail.com','hij123','hij123',103);
-INSERT INTO Customer VALUES('Sam','0874317890','sam@gmail.com','xyz123','xyz123',104);
-
+confirmPassword varchar2(20) CONSTRAINTS customer_confirmPassword_nn  NOT NULL);
 ----------------------------------------------------------------------------------------------------
+create table user
+(user_id varchar2(50) constraint user_user_id_pk primary key,
+user_name varchar2(50) constraint user_user_name_un_nn not null,
+password varchar2(50) constraint user_password_nn not null);
+------------------------------------------------------------------------------------------------------
+CREATE  TABLE Vegetable
+(veg_Id number(10) CONSTRAINTS Vegetable_veg_Id_pk PRIMARY KEY,
+name varchar2(20) CONSTRAINTS Vegetable_name_nn NOT NULL,
+type varchar2(20) CONSTRAINTS Vegetable_type_nn NOT NULL,
+category varchar2(20) CONSTRAINTS Vegetable_category_nn NOT NULL,
+price number(7,2) CONSTRAINTS Vegetable_price_nn NOT NULL,
+quantity number(20) CONSTRAINTS Vegetable_quantity_nn NIT NULL);
+
+--------------------------------------------------------------------------------------------------------
+CREATE TABLE cart(
+cart_Id number(20) CONSTRAINT cart_cartId_nn NOT NULL,
+cust_Id varchar2(20) CONSTRAINT cart_cust_Id_fk references customer(customerId),
+Veg_Id varchar2(20) CONSTRAINT cart_veg_Id_fk REFERENCES Vegetable(veg_Id));
+--------------------------------------------------------------------------------------------------
+CREATE TABLE Feedback(
+feedback_Id number(20) CONSTRAINTS feedback_feedback_Id_pk PRIMARY KEY,
+cust_Id number(20) CONSTRAINTS feedback_cust_Id_fk REFERENCES customer(cutomer_Id),
+veg_Id number(20) CONSTRAINTS feedback_veg_Id_fk REFERENCES vegetable(veg_Id),
+rating number(10) CONSTRAINTS feedback_rating_nn NOT NULL,
+comments varchar2(30) CONSTRAINTS feedback_commnets_nn NOT NULL);
+-------------------------------------------------------------------------------------------------------
+CREATE TABLE Admin(
+admin_Id number(20) CONSTRAINTS Admin_amin_Id_pk PRIMARY KEY,
+name varchar2(30) CONSTRAINTS Admin_nmae_nn NOT NULL,
+contact_Number varchar2(10) CONSTRAINTS Admin_contact_Number_un UNIQUE);
+-----------------------------------------------------------------------------------------------------
+CREATE TABLE order(
+order_No number(20) CONSTRAINTS order_order_No_pk PRIMARY KEY,
+cust_Id number(20) CONSTRAINTS order_cust_Id_fk REFERENCES customer(cutomer_Id),
+vegList varchar2(20) CONSTRAINTS order_vegList_fk REFERENCES Vegetable(name),
+total_Amount number(7,2) CONSTRAINTS order_total_Amount_nn NOT NULL,
+order_Date date CONSTRAINTS order_order_Date_nn NOT NULL,
+status varchar2(30) CONSTRAINTS order_status_nn NOT NULL);
+----------------------------------------------------------------------------------------------------------
+CREATE TABLE BillingDetails(
+billingId number(20) CONSTRAINTS BillingDetails_billingId_pk PRIMARY KEY,
+orderId number(20) CONSTRAINTS BillingDetails_orderId_fk REFERENCES order(order_No),
+transcationMode varchar2(20) CONSTRAINTS BillingDetails_transcationMode_nn NOT NULL,
+transcationDate date CONSTRAINTS BillingDetails_transcationDate_nn NOT NULL,
+transcationStatus varchar2(20) CONSTRAINTS BillingDetails_transcationStatus_nn NOT NULL);
+--------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
 
